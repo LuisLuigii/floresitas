@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para ti mi amor</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #0a1026;
+      overflow: hidden;
+      position: relative;
+    }
+    .stars {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    h1 {
+      color: #fffbe7;
+      font-family: 'Brush Script MT', cursive, sans-serif;
+      font-size: 3em;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #ffe066, 0 0 20px #fff;
+    }
+    .bouquet {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 10px;
+      max-width: 600px;
+    }
+    .flower {
+      width: 80px;
+      height: 120px;
+      margin: 0 5px;
+      transform: rotate(var(--angle, 0deg));
+    }
+  </style>
+</head>
+<body>
+  <canvas class="stars"></canvas>
+  <div class="container">
+    <h1>Para ti mi amor</h1>
+    <div class="bouquet">
+      <!-- Flor tipo 1 -->
+      <svg class="flower" style="--angle: -10deg" viewBox="0 0 80 120">
+        <ellipse cx="40" cy="60" rx="18" ry="30" fill="#ffe066"/>
+        <circle cx="40" cy="60" r="10" fill="#ffd700"/>
+        <rect x="36" y="80" width="8" height="40" fill="#4e944f"/>
+      </svg>
+      <!-- Flor tipo 2 -->
+      <svg class="flower" style="--angle: 5deg" viewBox="0 0 80 120">
+        <ellipse cx="40" cy="60" rx="20" ry="20" fill="#fff700"/>
+        <ellipse cx="40" cy="40" rx="8" ry="16" fill="#ffe066" transform="rotate(30 40 40)"/>
+        <ellipse cx="40" cy="80" rx="8" ry="16" fill="#ffe066" transform="rotate(-30 40 80)"/>
+        <circle cx="40" cy="60" r="8" fill="#ffd700"/>
+        <rect x="38" y="80" width="4" height="40" fill="#4e944f"/>
+      </svg>
+      <!-- Flor tipo 3 -->
+      <svg class="flower" style="--angle: 15deg" viewBox="0 0 80 120">
+        <ellipse cx="40" cy="60" rx="12" ry="28" fill="#ffe066"/>
+        <ellipse cx="40" cy="60" rx="28" ry="12" fill="#fff700"/>
+        <circle cx="40" cy="60" r="7" fill="#ffd700"/>
+        <rect x="39" y="80" width="2" height="40" fill="#4e944f"/>
+      </svg>
+      <!-- Flor tipo 4 -->
+      <svg class="flower" style="--angle: -20deg" viewBox="0 0 80 120">
+        <ellipse cx="40" cy="60" rx="16" ry="16" fill="#fff700"/>
+        <ellipse cx="40" cy="60" rx="8" ry="24" fill="#ffe066"/>
+        <circle cx="40" cy="60" r="6" fill="#ffd700"/>
+        <rect x="37" y="80" width="6" height="40" fill="#4e944f"/>
+      </svg>
+      <!-- Puedes duplicar y variar más flores aquí -->
+    </div>
+  </div>
+  <script>
+    // Generar estrellas en el fondo
+    const canvas = document.querySelector('.stars');
+    const ctx = canvas.getContext('2d');
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < 200; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const r = Math.random() * 1.2 + 0.3;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.fillStyle = "#fffbe7";
+        ctx.globalAlpha = Math.random() * 0.8 + 0.2;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    drawStars();
+    setInterval(drawStars, 2000); // Parpadeo suave
+  </script>
+</body>
+</html>
