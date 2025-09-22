@@ -19,183 +19,35 @@
           --dark-color: #000;
         }
 
-        /* Estilos de la página principal */
-        body.index-body {
+        body {
           color: azure;
           width: 100%;
           height: 100vh;
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
           background-color: black;
           font-family: 'Poppins',cursive;
           overflow: hidden;
           position: relative;
         }
 
-        .botones{
-            padding: 9px;
-            border-radius: 80px;
-            background-color: transparent;
-            border: none;
-            margin-top: 20px;
-            z-index: 10;
-        }
-
-        .botones a{
-            background-color: #0a2be9;
-            padding: 9px 20px;
-            border-radius: 80px;
-            -webkit-border-radius: 80px;
-            -moz-border-radius: 80px;
-            -ms-border-radius: 80px;
-            -o-border-radius: 80px;
-            text-decoration: none;
-            color: #fff;
-            font-family: 'Poppins', cursive;
-            transition: all 0.3s ease;
-        }
-
-        .botones a:hover{
-            background-color: #39c6d6;
-            transform: scale(1.05);
-        }
-
-        .botones a:focus{
-            background-color: rgb(50, 194, 194);
-        }
-
-        .greetings{
-            font-size: 7rem;
-            font-weight: 900;
-            z-index: 10;
-        }
-        .greetings > span{
-            animation: glow 2.5s ease-in-out infinite;
-        }
-        @keyframes glow{
-            0%, 100%{
-                color: #fff;
-                text-shadow: 0 0 12px #39c6d6, 0 0 50px #39c6d6, 0 0 100px #39c6d6;
-            }
-            10%, 90%{
-                color: #111;
-                text-shadow: none;
-            }
-        }
-        .greetings > span:nth-child(2){
-            animation-delay: .2s ;
-        }
-        .greetings > span:nth-child(3){
-            animation-delay: .4s ;
-        }
-        .greetings > span:nth-child(4){
-            animation-delay: .6s;
-        }
-        .greetings > span:nth-child(5){
-            animation-delay: .8s;
-        }
-        .greetings > span:nth-child(6){
-            animation-delay: 1s;
-        }
-
-        .description{
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            z-index: 10;
-            text-align: center;
-        }
-
-        @media screen and (max-width:574px){
-            .greetings{
-                display: block;
-                font-size: 4rem;
-                font-weight: 800;
-                text-align: center;
-            }
-            .description{
-                font-size: 1.2rem;
-            }
-            
-            .button a{
-                font-size: 1rem;
-            }
-        }
-
-        /* Corazones flotantes */
-        .heart {
-            position: absolute;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .heart::before,
-        .heart::after {
-            content: "";
-            background-color: red;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
-        
-        .heart::before {
-            top: -50%;
-            left: 0;
-        }
-        
-        .heart::after {
-            top: 0;
-            left: 50%;
-        }
-
-        /* Estilos de la página de la flor */
-        body.flower-body {
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          min-height: 100vh;
-          background-color: var(--dark-color);
-          overflow: hidden;
-          perspective: 1000px;
-        }
-
-        #lyrics {
-          font-size: 28px;
-          font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-          color: white;
-          position: absolute;
-          margin-bottom: 20%;
-          z-index: 1;
-          font-weight: bold;
-          letter-spacing: 4px;
-        }
-        @media only screen and (max-width: 600px) {
-          #lyrics {
-              font-size: 14px;
-              margin-bottom: 530px;
-              letter-spacing: 3px;
-          }
-        }
         .titulo {
-          margin-bottom: 180px;
+          margin-top: 60px;
+          margin-bottom: 60px;
           font-family: "Arial Narrow", Arial, sans-serif;
-          color: yellow;
-          position: absolute;
+          color: #ffe600;
+          font-size: 2.5rem;
           font-weight: bold;
-          letter-spacing: 10px;
-          opacity: 0;
+          letter-spacing: 6px;
+          opacity: 1;
           animation: fadeIn 3s ease-in-out forwards;
           text-align: center;
         }
         @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
 
         .night {
@@ -243,9 +95,11 @@
 
         .flowers {
           position: relative;
+          width: 90vw;
+          min-height: 70vh;
+          margin-bottom: 40px;
           transform: scale(0.9);
         }
-
         @media only screen and (max-width: 600px) {
           .flowers {
               font-size: 14px;
@@ -254,7 +108,6 @@
               transform: scale(1.0);
           }
         }
-
         .flower {
           position: absolute;
           bottom: 10vmin;
@@ -1810,89 +1663,183 @@
             opacity: 0;
           }
         }
-    </style>
+    </style>        
 </head>
 
-<body class="index-body">
-    <!-- Página de inicio -->
-    <div id="index-page">
-        <div class="greetings">
-            <span>H</span>
-            <span>o</span>
-            <span>l</span>
-            <span>a</span>
-            <span>!</span>
+<body>
+    <audio id="background-music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5a4c3c9f64.mp3?filename=soft-sweet-romantic-background-music-6440.mp3" loop></audio>
+    <h1 class="titulo">Para ti mi amor</h1>
+    <div class="night"></div>
+    <div class="flowers">
+      <!-- 7 flores, puedes ajustar la cantidad duplicando o quitando bloques -->
+      <div class="flower flower--1" style="left: 10%; transform: rotate(-10deg);">
+        <div class="flower__leafs flower__leafs--1">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
         </div>
-        <div class="description">
-            <span>ESTAS FLORES AMARILLAS SON PARA TI</span>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+          <div class="flower__line__leaf flower__line__leaf--5"></div>
+          <div class="flower__line__leaf flower__line__leaf--6"></div>
         </div>
-        <div class="button">
-            <button class="botones">
-                <a href="#" id="flower-link">CLICK AQUÍ</a>
-            </button>
+      </div>
+      <div class="flower flower--2" style="left: 25%; transform: rotate(10deg);">
+        <div class="flower__leafs flower__leafs--2">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
         </div>
-    </div>
-
-    <!-- Página de la flor (oculta inicialmente) -->
-    <div id="flower-page" class="hidden">
-        <audio id="background-music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5a4c3c9f64.mp3?filename=soft-sweet-romantic-background-music-6440.mp3" loop></audio>
-        <div id="lyrics"></div>
-        <h1 class="titulo">Estas flores amarillas son un reflejo de la alegría que traes a mi vida. <br> <br>
-          Gracias por iluminar mis días con tu presencia.</h1>
-      
-        <div class="night"></div>
-        <div class="flowers">
-          <div class="flower flower--1">
-            <div class="flower__leafs flower__leafs--1">
-              <div class="flower__leaf flower__leaf--1"></div>
-              <div class="flower__leaf flower__leaf--2"></div>
-              <div class="flower__leaf flower__leaf--3"></div>
-              <div class="flower__leaf flower__leaf--4"></div>
-              <div class="flower__white-circle"></div>
-
-              <div class="flower__light flower__light--1"></div>
-              <div class="flower__light flower__light--2"></div>
-              <div class="flower__light flower__light--3"></div>
-              <div class="flower__light flower__light--4"></div>
-              <div class="flower__light flower__light--5"></div>
-              <div class="flower__light flower__light--6"></div>
-              <div class="flower__light flower__light--7"></div>
-              <div class="flower__light flower__light--8"></div>
-            </div>
-            <div class="flower__line">
-              <div class="flower__line__leaf flower__line__leaf--1"></div>
-              <div class="flower__line__leaf flower__line__leaf--2"></div>
-              <div class="flower__line__leaf flower__line__leaf--3"></div>
-              <div class="flower__line__leaf flower__line__leaf--4"></div>
-              <div class="flower__line__leaf flower__line__leaf--5"></div>
-              <div class="flower__line__leaf flower__line__leaf--6"></div>
-            </div>
-          </div>
-
-          <div class="flower flower--2">
-            <div class="flower__leafs flower__leafs--2">
-              <div class="flower__leaf flower__leaf--1"></div>
-              <div class="flower__leaf flower__leaf--2"></div>
-              <div class="flower__leaf flower__leaf--3"></div>
-              <div class="flower__leaf flower__leaf--4"></div>
-              <div class="flower__white-circle"></div>
-
-              <div class="flower__light flower__light--1"></div>
-              <div class="flower__light flower__light--2"></div>
-              <div class="flower__light flower__light--3"></div>
-              <div class="flower__light flower__light--4"></div>
-              <div class="flower__light flower__light--5"></div>
-              <div class="flower__light flower__light--6"></div>
-              <div class="flower__light flower__light--7"></div>
-              <div class="flower__light flower__light--8"></div>
-            </div>
-            <div class="flower__line">
-              <div class="flower__line__leaf flower__line__leaf--1"></div>
-              <div class="flower__line__leaf flower__line__leaf--2"></div>
-              <div class="flower__line__leaf flower__line__leaf--3"></div>
-              <div class="flower__line__leaf flower__line__leaf--4"></div>
-            </div>
-          </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
+      </div>
+      <div class="flower flower--3" style="left: 40%; transform: rotate(-5deg);">
+        <div class="flower__leafs flower__leafs--3">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
+      </div>
+      <div class="flower flower--1" style="left: 55%; transform: rotate(8deg);">
+        <div class="flower__leafs flower__leafs--1">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+          <div class="flower__line__leaf flower__line__leaf--5"></div>
+          <div class="flower__line__leaf flower__line__leaf--6"></div>
+        </div>
+      </div>
+      <div class="flower flower--2" style="left: 70%; transform: rotate(-12deg);">
+        <div class="flower__leafs flower__leafs--2">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
+      </div>
+      <div class="flower flower--3" style="left: 85%; transform: rotate(6deg);">
+        <div class="flower__leafs flower__leafs--3">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
+      </div>
+      <div class="flower flower--1" style="left: 50%; transform: rotate(0deg);">
+        <div class="flower__leafs flower__leafs--1">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+          <div class="flower__line__leaf flower__line__leaf--5"></div>
+          <div class="flower__line__leaf flower__line__leaf--6"></div>
+        </div>
+      </div>
+    
 
           <div class="flower flower--3">
             <div class="flower__leafs flower__leafs--3">
@@ -2156,206 +2103,31 @@
     </div>
 
     <script>
-        // Función para crear corazones flotantes
+        // Corazones flotantes igual que antes
         function createHearts() {
             const colors = ['#ff2a6d', '#05d9e8', '#d1f7ff', '#ffcc00', '#ff6ec7', '#ff8e8e', '#9d4edd', '#ff5e00'];
-            
             setInterval(() => {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
-                
-                // Tamaño aleatorio
                 const size = Math.random() * 20 + 10;
                 heart.style.width = size + 'px';
                 heart.style.height = size + 'px';
-                
-                // Color aleatorio
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 heart.style.backgroundColor = color;
-                
-                // Posición inicial aleatoria
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.top = '100vh';
-                
-                // Animación
                 heart.style.animation = `float ${Math.random() * 6 + 4}s linear forwards`;
-                
                 document.body.appendChild(heart);
-                
-                // Eliminar el corazón después de la animación
-                setTimeout(() => {
-                    heart.remove();
-                }, 10000);
+                setTimeout(() => { heart.remove(); }, 10000);
             }, 300);
         }
-        
-        // Iniciar corazones flotantes
         createHearts();
 
-        // Función para cambiar entre páginas
-        document.getElementById('flower-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('index-page').classList.add('hidden');
-            document.getElementById('flower-page').classList.remove('hidden');
-            document.body.classList.remove("index-body");
-            document.body.classList.add("flower-body");
-            document.body.classList.remove("container");
-            
-            // Iniciar la música
+        // Música automática
+        window.addEventListener('DOMContentLoaded', function() {
             const audio = document.getElementById('background-music');
-            audio.play().catch(error => {
-                console.log('La reproducción automática fue prevenida:', error);
-            });
-            
-            // Iniciar la lluvia de frases
-            createLoveRain();
-            
-            // Iniciar las animaciones de letras
-            startLyricsAnimation();
+            audio.play().catch(error => { /* Autoplay puede ser bloqueado */ });
         });
-
-        // Array de frases de amor cortas con temática de flores amarillas
-        const lovePhrases = [
-            "💛 Eres mi sol",
-            "🌻 Mi girasol",
-            "✨ Brillas más",
-            "💖 Eres única",
-            "🌞 Mi luz",
-            "🌸 Mi flor",
-            "💫 Eres mágica",
-            "🌼 Alegría pura",
-            "💕 Te amo",
-            "🌟 Mi estrella",
-            "😊 Mi sonrisa",
-            "🌺 Mi jardín",
-            "💝 Eres especial",
-            "🦋 Mi mariposa",
-            "🌹 Mi amor"
-        ];
-
-        // Colores vibrantes para las frases
-        const colors = [
-            '#FF5252', '#FF4081', '#E040FB', '#7C4DFF', '#536DFE',
-            '#448AFF', '#40C4FF', '#18FFFF', '#64FFDA', '#69F0AE',
-            '#B2FF59', '#EEFF41', '#FFFF00', '#FFD740', '#FFAB40',
-            '#FF6E40', '#FF5252', '#FF8A80', '#FF80AB', '#EA80FC'
-        ];
-
-        // Función para crear la lluvia de frases
-        function createLoveRain() {
-            const container = document.getElementById("loveRain");
-            
-            // Crear frases continuamente
-            setInterval(function() {
-                if (document.hidden || !document.hasFocus()) return; // Pausar cuando la pestaña no está activa
-                
-                const phraseElement = document.createElement("div");
-                phraseElement.className = "love-phrase";
-                
-                // Seleccionar una frase aleatoria
-                const randomPhrase = lovePhrases[Math.floor(Math.random() * lovePhrases.length)];
-                phraseElement.textContent = randomPhrase;
-                
-                // Posición horizontal aleatoria
-                const leftPosition = Math.random() * 100;
-                phraseElement.style.left = leftPosition + "vw";
-                
-                // Color aleatorio
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                phraseElement.style.color = randomColor;
-                
-                // Tamaño aleatorio
-                const size = 16 + Math.random() * 20;
-                phraseElement.style.fontSize = size + "px";
-                phraseElement.style.fontWeight = 'bold';
-                
-                // Velocidad de caída aleatoria
-                const fallDuration = 5 + Math.random() * 10;
-                phraseElement.style.animation = "fall " + fallDuration + "s linear";
-                
-                container.appendChild(phraseElement);
-                
-                // Eliminar el elemento después de que termine la animación
-                setTimeout(function() {
-                    if (phraseElement.parentNode === container) {
-                        container.removeChild(phraseElement);
-                    }
-                }, fallDuration * 1000);
-                
-            }, 500); // Crear una nueva frase cada 500ms
-        }
-
-        // Array de objetos que contiene cada línea y su tiempo de aparición en segundos
-        const lyricsData = [
-            { text: "At the time", time: 15 },
-            { text: "The whisper of birds", time: 18 },
-            { text: "Lonely before the sun cried", time: 27 },
-            { text: "Fell from the sky", time: 32 },
-            { text: "Like water drops", time: 33 },
-            { text: "Where I'm now? I don't know why", time: 41 },
-            { text: "Nice butterflies in my hands", time: 47 },
-            { text: "Too much light for twilight", time: 54 },
-            { text: "In the mood for the flowers love", time: 59 },
-            { text: "That vision", time: 67 },
-            { text: "Really strong, blew my mind", time: 72 },
-            { text: "Silence Let me see what it was", time: 78 },
-            { text: "I only want to live in clouds", time: 83 },
-            { text: "Where I'm now? I don't know why", time: 91 },
-            { text: "Nice butterflies in my hands", time: 97 },
-            { text: "Too much light for twilight", time: 104 },
-            { text: "In the mood for the flowers love", time: 108 },
-            { text: "At the time", time: 144 },
-            { text: "The whisper of birds", time: 148 },
-            { text: "Lonely before the sun cried", time: 153 },
-            { text: "Fell from the sky", time: 158 },
-            { text: "Like water drops", time: 164 },
-            { text: "Where I'm now? I don't know why", time: 169 },
-            { text: "Nice butterflies in my hands", time: 176 },
-            { text: "Too much light for twilight", time: 183 },
-            { text: "In the mood for the flowers", time: 188 },
-            { text: "Love.", time: 140 },
-        ];
-
-        // Función para animar las letras
-        function startLyricsAnimation() {
-            const audio = document.getElementById("background-music");
-            const lyrics = document.getElementById("lyrics");
-
-            function updateLyrics() {
-                const time = Math.floor(audio.currentTime);
-                const currentLine = lyricsData.find(
-                    (line) => time >= line.time && time < line.time + 6
-                );
-
-                if (currentLine) {
-                    // Calcula la opacidad basada en el tiempo en la línea actual
-                    const fadeInDuration = 0.1; // Duración del efecto de aparición en segundos
-                    const opacity = Math.min(1, (time - currentLine.time) / fadeInDuration);
-
-                    // Aplica el efecto de aparición
-                    lyrics.style.opacity = opacity;
-                    lyrics.innerHTML = currentLine.text;
-                } else {
-                    // Restablece la opacidad y el contenido si no hay una línea actual
-                    lyrics.style.opacity = 0;
-                    lyrics.innerHTML = "";
-                }
-            }
-
-            setInterval(updateLyrics, 1000);
-
-            // Función para ocultar el título después de 216 segundos
-            function ocultarTitulo() {
-                const titulo = document.querySelector(".titulo");
-                titulo.style.animation = "fadeOut 3s ease-in-out forwards";
-                setTimeout(function () {
-                    titulo.style.display = "none";
-                }, 3000); // Espera 3 segundos antes de ocultar completamente
-            }
-
-            // Llama a la función después de 216 segundos (216,000 milisegundos)
-            setTimeout(ocultarTitulo, 216000);
-        }
     </script>
 </body>
 </html>
