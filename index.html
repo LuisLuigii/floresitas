@@ -37,18 +37,31 @@
       text-shadow: 0 0 10px #ffe066, 0 0 20px #fff;
     }
     .bouquet {
+      position: relative;
+      width: 400px;
+      height: 420px;
+      margin: 0 auto;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
       align-items: flex-end;
-      gap: 10px;
-      max-width: 600px;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .stem {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 8px;
+      height: 180px;
+      background: #4e944f;
+      border-radius: 4px;
+      z-index: 0;
+      transform: translateX(-50%);
+      box-shadow: 0 0 8px #4e944f88;
     }
     .flower {
-      width: 80px;
-      height: 120px;
-      margin: 0 5px;
-      transform: rotate(var(--angle, 0deg));
+      position: absolute;
+      z-index: 1;
+      transition: transform 0.2s;
     }
   </style>
 </head>
@@ -56,64 +69,125 @@
   <canvas class="stars"></canvas>
   <div class="container">
     <h1>Para ti mi amor</h1>
-    <div class="bouquet">
-      <!-- Flor tipo 1 -->
-      <svg class="flower" style="--angle: -10deg" viewBox="0 0 80 120">
-        <ellipse cx="40" cy="60" rx="18" ry="30" fill="#ffe066"/>
-        <circle cx="40" cy="60" r="10" fill="#ffd700"/>
-        <rect x="36" y="80" width="8" height="40" fill="#4e944f"/>
-      </svg>
-      <!-- Flor tipo 2 -->
-      <svg class="flower" style="--angle: 5deg" viewBox="0 0 80 120">
-        <ellipse cx="40" cy="60" rx="20" ry="20" fill="#fff700"/>
-        <ellipse cx="40" cy="40" rx="8" ry="16" fill="#ffe066" transform="rotate(30 40 40)"/>
-        <ellipse cx="40" cy="80" rx="8" ry="16" fill="#ffe066" transform="rotate(-30 40 80)"/>
-        <circle cx="40" cy="60" r="8" fill="#ffd700"/>
-        <rect x="38" y="80" width="4" height="40" fill="#4e944f"/>
-      </svg>
-      <!-- Flor tipo 3 -->
-      <svg class="flower" style="--angle: 15deg" viewBox="0 0 80 120">
-        <ellipse cx="40" cy="60" rx="12" ry="28" fill="#ffe066"/>
-        <ellipse cx="40" cy="60" rx="28" ry="12" fill="#fff700"/>
-        <circle cx="40" cy="60" r="7" fill="#ffd700"/>
-        <rect x="39" y="80" width="2" height="40" fill="#4e944f"/>
-      </svg>
-      <!-- Flor tipo 4 -->
-      <svg class="flower" style="--angle: -20deg" viewBox="0 0 80 120">
-        <ellipse cx="40" cy="60" rx="16" ry="16" fill="#fff700"/>
-        <ellipse cx="40" cy="60" rx="8" ry="24" fill="#ffe066"/>
-        <circle cx="40" cy="60" r="6" fill="#ffd700"/>
-        <rect x="37" y="80" width="6" height="40" fill="#4e944f"/>
-      </svg>
-      <!-- Puedes duplicar y variar más flores aquí -->
+    <div class="bouquet" id="bouquet">
+      <div class="stem"></div>
+      <!-- Las flores se generarán por JS -->
     </div>
   </div>
   <script>
-    // Generar estrellas en el fondo
+    // --- ESTRELLAS EN MOVIMIENTO ---
     const canvas = document.querySelector('.stars');
     const ctx = canvas.getContext('2d');
+    let stars = [];
     function resize() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
     window.addEventListener('resize', resize);
     resize();
-    function drawStars() {
+
+    function createStars(num) {
+      stars = [];
+      for (let i = 0; i < num; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.2 + 0.3,
+          speed: Math.random() * 0.2 + 0.05,
+          alpha: Math.random() * 0.7 + 0.3
+        });
+      }
+    }
+    createStars(180);
+
+    function animateStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < 200; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const r = Math.random() * 1.2 + 0.3;
+      for (let star of stars) {
         ctx.beginPath();
-        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
         ctx.fillStyle = "#fffbe7";
-        ctx.globalAlpha = Math.random() * 0.8 + 0.2;
+        ctx.globalAlpha = star.alpha;
         ctx.fill();
+        // Movimiento hacia abajo, con leve oscilación horizontal
+        star.y += star.speed;
+        star.x += Math.sin(star.y / 30) * 0.1;
+        if (star.y > canvas.height) {
+          star.y = -2;
+          star.x = Math.random() * canvas.width;
+        }
       }
       ctx.globalAlpha = 1;
+      requestAnimationFrame(animateStars);
     }
-    drawStars();
-    setInterval(drawStars, 2000); // Parpadeo suave
+    animateStars();
+
+    // --- RAMO DE MUCHAS FLORES ---
+    const bouquet = document.getElementById('bouquet');
+    // Tipos de flores SVG
+    const flowerSVGs = [
+      // Margarita
+      `<svg width="60" height="80" viewBox="0 0 60 80">
+        <g>
+          <ellipse cx="30" cy="40" rx="18" ry="20" fill="#ffe066"/>
+          <ellipse cx="30" cy="40" rx="8" ry="24" fill="#fff700" transform="rotate(30 30 40)"/>
+          <ellipse cx="30" cy="40" rx="8" ry="24" fill="#fff700" transform="rotate(-30 30 40)"/>
+          <circle cx="30" cy="40" r="8" fill="#ffd700"/>
+        </g>
+      </svg>`,
+      // Girasol
+      `<svg width="60" height="80" viewBox="0 0 60 80">
+        <g>
+          <ellipse cx="30" cy="40" rx="20" ry="10" fill="#ffe066" transform="rotate(0 30 40)"/>
+          <ellipse cx="30" cy="40" rx="20" ry="10" fill="#ffe066" transform="rotate(45 30 40)"/>
+          <ellipse cx="30" cy="40" rx="20" ry="10" fill="#ffe066" transform="rotate(90 30 40)"/>
+          <ellipse cx="30" cy="40" rx="20" ry="10" fill="#ffe066" transform="rotate(135 30 40)"/>
+          <circle cx="30" cy="40" r="10" fill="#ffd700"/>
+        </g>
+      </svg>`,
+      // Tulipán
+      `<svg width="60" height="80" viewBox="0 0 60 80">
+        <g>
+          <ellipse cx="30" cy="50" rx="12" ry="18" fill="#fff700"/>
+          <ellipse cx="30" cy="38" rx="8" ry="10" fill="#ffe066"/>
+          <ellipse cx="22" cy="48" rx="4" ry="8" fill="#ffe066"/>
+          <ellipse cx="38" cy="48" rx="4" ry="8" fill="#ffe066"/>
+          <circle cx="30" cy="50" r="6" fill="#ffd700"/>
+        </g>
+      </svg>`,
+      // Flor simple
+      `<svg width="60" height="80" viewBox="0 0 60 80">
+        <g>
+          <ellipse cx="30" cy="40" rx="14" ry="14" fill="#fff700"/>
+          <ellipse cx="30" cy="40" rx="6" ry="18" fill="#ffe066"/>
+          <circle cx="30" cy="40" r="6" fill="#ffd700"/>
+        </g>
+      </svg>`
+    ];
+
+    // Generar muchas flores en forma de ramo (triángulo invertido)
+    const rows = 8; // filas de flores
+    let flowerCount = 0;
+    for (let row = 0; row < rows; row++) {
+      const flowersInRow = rows + 2 - row; // menos flores en la parte baja
+      for (let i = 0; i < flowersInRow; i++) {
+        const type = Math.floor(Math.random() * flowerSVGs.length);
+        const size = 48 + Math.random() * 24; // tamaño aleatorio
+        const angle = (Math.random() - 0.5) * 30; // inclinación aleatoria
+        // Posición en triángulo invertido
+        const x = 200 - (flowersInRow * size) / 2 + i * size + Math.random() * 8 - 4;
+        const y = 320 - row * 38 + Math.random() * 8 - 4;
+        const flower = document.createElement('div');
+        flower.className = 'flower';
+        flower.style.left = `${x}px`;
+        flower.style.top = `${y}px`;
+        flower.style.transform = `rotate(${angle}deg) scale(${size/60})`;
+        flower.innerHTML = flowerSVGs[type];
+        bouquet.appendChild(flower);
+        flowerCount++;
+      }
+    }
+    // Puedes ajustar "rows" y "flowersInRow" para más o menos flores
+
   </script>
 </body>
 </html>
